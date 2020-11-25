@@ -1,5 +1,4 @@
 import React from 'react'
-import { View, Text } from 'react-native'
 
 import { useFormikContext } from 'formik'
 import AppPicker from '../Picker'
