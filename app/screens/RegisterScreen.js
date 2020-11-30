@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(4).label("Password"),
 });
 
-export default function RegisterScreen() {
+function RegisterScreen() {
     const registerApi = useApi(usersApi.register);
     const loginApi = useApi(authApi.login);
     const auth = useAuth();
@@ -84,11 +84,13 @@ export default function RegisterScreen() {
                 </Form>
             </Screen>
         </React.Fragment>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        padding: 10,
     },
-})
+});
+
+export default RegisterScreen;
