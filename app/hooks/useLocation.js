@@ -10,8 +10,9 @@ export default useLocation = () => {
             if (!granted) return;
             const {
                 coords: { latitude, longitude },
-            } = await Location.getLastKnownPositionAsync();
+            } = await Location.getLastKnownPositionAsync() || await Location.getCurrentPositionAsync();
             setLocation({ latitude, longitude });
+            console.log(latitude, longitude);
         } catch (error) {
             console.log(error);
         }
