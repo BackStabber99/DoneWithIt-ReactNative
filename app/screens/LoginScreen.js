@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(4).label("Password"),
 });
 
-export default function LoginScreen(props) {
+function LoginScreen(props) {
     const auth = useAuth();
     const [loginFailed, setLoginFailed] = useState(false);
 
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
+export default LoginScreen;

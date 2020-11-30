@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 25,
     justifyContent: "center",
   },
   image: {

@@ -8,7 +8,6 @@ import {
     FormPicker as Picker,
     SubmitButton,
 } from "../components/forms";
-
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
@@ -121,12 +120,7 @@ function ListingEditScreen() {
                 validationSchema={validationSchema}
             >
                 <FormImagePicker name="images" />
-                <FormField
-                    keyboardType="default"
-                    maxLength={255}
-                    name="title"
-                    placeholder="Title"
-                />
+                <FormField maxLength={255} name="title" placeholder="Title" />
                 <FormField
                     keyboardType="numeric"
                     maxLength={8}

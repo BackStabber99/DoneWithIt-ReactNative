@@ -7,7 +7,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 
 const Stack = createStackNavigator();
 
-export default AuthNavigator = () => (
+const AuthNavigator = () => (
     <Stack.Navigator>
         <Stack.Screen
             name="Welcome"
@@ -18,3 +18,5 @@ export default AuthNavigator = () => (
         <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
 );
+
+export default AuthNavigator;

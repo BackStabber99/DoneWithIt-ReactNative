@@ -1,72 +1,71 @@
-import React, { useState } from 'react'
-import { FlatList } from 'react-native'
-import ListItem from '../components/lists/ListItem'
-import ListItemDeleteAction from '../components/lists/ListItemDeleteAction'
-import ListItemSeperator from '../components/lists/ListItemSeperator'
+import React, { useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import Screen from '../components/Screen'
+import Screen from "../components/Screen";
+import {
+    ListItem,
+    ListItemDeleteAction,
+    ListItemSeparator,
+} from "../components/lists";
 
-const initalMessages = [
+const initialMessages = [
     {
         id: 1,
-        title: 'T1',
-        description: 'D1',
-        image: require("../assets/jacket.jpg")
+        title: "Mayank Jain",
+        description: "Hey! Is this item still available?",
+        image: require("../assets/Mayank.jpg"),
     },
     {
         id: 2,
-        title: 'T2',
-        description: 'D2',
-        image: require("../assets/jacket.jpg")
+        title: "Mayank Jain",
+        description:
+            "I'm interested in this item. When will you be able to post it?",
+        image: require("../assets/Mayank.jpg"),
     },
-    {
-        id: 3,
-        title: 'T3',
-        description: 'D3',
-        image: require("../assets/jacket.jpg")
-    },
-]
+];
 
-export default function MessagesScreen() {
-
-    const [messages, setMessages] = useState(initalMessages)
+function MessagesScreen(props) {
+    const [messages, setMessages] = useState(initialMessages);
     const [refreshing, setRefreshing] = useState(false);
 
-    const handleDelete = message => {
-        //Delete message
-        setMessages(messages.filter(m => m.id !== message.id))
-        //delete from server
-    }
+    const handleDelete = (message) => {
+        // Delete the message from messages
+        setMessages(messages.filter((m) => m.id !== message.id));
+    };
 
     return (
         <Screen>
             <FlatList
                 data={messages}
-                keyExtractor={message => message.id.toString()}
-                renderItem={({ item }) =>
+                keyExtractor={(message) => message.id.toString()}
+                renderItem={({ item }) => (
                     <ListItem
                         title={item.title}
                         subTitle={item.description}
                         image={item.image}
-                        onPress={() => console.log("Message", item)}
-                        renderRightActions={() =>
-                            <ListItemDeleteAction onPress={() => handleDelete(item)}
-                            />
-                        }
-                    />}
-                ItemSeparatorComponent={ListItemSeperator}
+                        onPress={() => console.log("Message selected", item)}
+                        renderRightActions={() => (
+                            <ListItemDeleteAction onPress={() => handleDelete(item)} />
+                        )}
+                    />
+                )}
+                ItemSeparatorComponent={ListItemSeparator}
                 refreshing={refreshing}
                 onRefresh={() => {
                     setMessages([
                         {
                             id: 2,
-                            title: 'T2',
-                            description: 'D2',
-                            image: require("../assets/jacket.jpg")
+                            title: "T2",
+                            description: "D2",
+                            image: require("../assets/Mayank.jpg"),
                         },
-                    ])
+                    ]);
                 }}
             />
         </Screen>
-    )
+    );
 }
+
+const styles = StyleSheet.create({});
+
+export default MessagesScreen;

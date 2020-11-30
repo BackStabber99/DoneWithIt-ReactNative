@@ -1,56 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import React, { useEffect } from "react";
+import { FlatList, StyleSheet } from "react-native";
 
-import Button from '../components/Button'
-import Card from '../components/Card'
-import Screen from '../components/Screen'
-import colors from '../config/colors'
-import routes from '../navigation/routes'
+import ActivityIndicator from "../components/ActivityIndicator";
+import Button from "../components/Button";
+import Card from "../components/Card";
+import colors from "../config/colors";
+import listingsApi from "../api/listings";
+import routes from "../navigation/routes";
+import Screen from "../components/Screen";
+import AppText from "../components/Text";
+import useApi from "../hooks/useApi";
 
-import ActivityIndicator from '../components/ActivityIndicator'
-
-import listingApi from '../api/listings'
-import AppText from '../components/Text'
-
-
-export default function ListingsScreen({ navigation }) {
-
-    const [listings, setListings] = useState([])
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
+function ListingsScreen({ navigation }) {
+    const getListingsApi = useApi(listingsApi.getListings);
 
     useEffect(() => {
-        loadListings()
-    }, [])
-
-    const loadListings = async () => {
-        setLoading(true)
-        const response = await listingApi.getListings()
-        setLoading(false)
-
-        if (!response.ok) return setError(true)
-
-        setError(false)
-        setListings(response.data)
-    }
+        getListingsApi.request();
+    }, []);
 
     return (
         <React.Fragment>
-            <ActivityIndicator visible={loading} />
+            <ActivityIndicator visible={getListingsApi.loading} />
             <Screen style={styles.screen}>
-                {
-                    error &&
+                {getListingsApi.error && (
                     <React.Fragment>
-                        <AppText>Couldn't retrieve the listings</AppText>
-
-                        <Button title="Retry" onPress={loadListings} />
+                        <AppText>Couldn't retrieve the listings.</AppText>
+                        <Button title="Retry" onPress={getListingsApi.request} />
                     </React.Fragment>
-                }
-
+                )}
                 <FlatList
-                    data={listings}
-                    keyExtractor={listings => listings.id.toString()}
-                    renderItem={({ item }) =>
+                    data={getListingsApi.data}
+                    keyExtractor={(listing) => listing.id.toString()}
+                    renderItem={({ item }) => (
                         <Card
                             title={item.title}
                             subTitle={"$" + item.price}
@@ -58,16 +39,18 @@ export default function ListingsScreen({ navigation }) {
                             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
                             thumbnailUrl={item.images[0].thumbnailUrl}
                         />
-                    }
+                    )}
                 />
             </Screen>
         </React.Fragment>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     screen: {
         padding: 10,
-        backgroundColor: colors.light
-    }
-})
+        backgroundColor: colors.light,
+    },
+});
+
+export default ListingsScreen;

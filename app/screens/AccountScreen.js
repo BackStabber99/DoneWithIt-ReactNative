@@ -26,7 +26,7 @@ const menuItems = [
     },
 ];
 
-export default function AccountScreen({ navigation }) {
+function AccountScreen({ navigation }) {
     const { user, logOut } = useAuth();
 
     return (
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
+export default AccountScreen;

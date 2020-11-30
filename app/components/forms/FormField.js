@@ -14,7 +14,7 @@ function AppFormField({ name, width, ...otherProps }) {
   } = useFormikContext();
 
   return (
-    <>
+    <React.Fragment>
       <TextInput
         onBlur={() => setFieldTouched(name)}
         onChangeText={(text) => setFieldValue(name, text)}
@@ -23,7 +23,7 @@ function AppFormField({ name, width, ...otherProps }) {
         {...otherProps}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
-    </>
+    </React.Fragment>
   );
 }
 

@@ -27,7 +27,7 @@ function AppPicker({
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <>
+    <React.Fragment>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
         <View style={[styles.container, { width }]}>
           {icon && (
@@ -41,8 +41,8 @@ function AppPicker({
           {selectedItem ? (
             <Text style={styles.text}>{selectedItem.label}</Text>
           ) : (
-            <Text style={styles.placeholder}>{placeholder}</Text>
-          )}
+              <Text style={styles.placeholder}>{placeholder}</Text>
+            )}
 
           <MaterialCommunityIcons
             name="chevron-down"
@@ -71,7 +71,7 @@ function AppPicker({
           />
         </Screen>
       </Modal>
-    </>
+    </React.Fragment>
   );
 }
 

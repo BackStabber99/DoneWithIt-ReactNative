@@ -16,14 +16,14 @@ function UploadScreen({ onDone, progress = 0, visible = false }) {
             width={200}
           />
         ) : (
-          <LottieView
-            autoPlay
-            loop={false}
-            onAnimationFinish={onDone}
-            source={require("../assets/animations/done.json")}
-            style={styles.animation}
-          />
-        )}
+            <LottieView
+              autoPlay
+              loop={false}
+              onAnimationFinish={onDone}
+              source={require("../assets/animations/done.json")}
+              style={styles.animation}
+            />
+          )}
       </View>
     </Modal>
   );

@@ -15,7 +15,7 @@ function AppFormPicker({
   const { errors, setFieldValue, touched, values } = useFormikContext();
 
   return (
-    <>
+    <React.Fragment>
       <Picker
         items={items}
         numberOfColumns={numberOfColumns}
@@ -26,7 +26,7 @@ function AppFormPicker({
         width={width}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
-    </>
+    </React.Fragment>
   );
 }
 
