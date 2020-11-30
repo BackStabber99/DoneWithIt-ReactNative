@@ -35,32 +35,33 @@ export default function ListingsScreen({ navigation }) {
     }
 
     return (
-        <Screen style={styles.screen}>
-            {
-                error &&
-                <React.Fragment>
-                    <AppText>Couldn't retrieve the listings</AppText>
-
-                    <Button title="Retry" onPress={loadListings} />
-                </React.Fragment>
-            }
+        <React.Fragment>
             <ActivityIndicator visible={loading} />
+            <Screen style={styles.screen}>
+                {
+                    error &&
+                    <React.Fragment>
+                        <AppText>Couldn't retrieve the listings</AppText>
 
-            <FlatList
-                data={listings}
-                keyExtractor={listings => listings.id.toString()}
-                renderItem={({ item }) =>
-                    <Card
-                        title={item.title}
-                        subTitle={"$" + item.price}
-                        imageUrl={item.images[0].url}
-                        onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-                        thumbnailUrl={item.images[0].thumbnailUrl}
-                    />
+                        <Button title="Retry" onPress={loadListings} />
+                    </React.Fragment>
                 }
-            />
 
-        </Screen>
+                <FlatList
+                    data={listings}
+                    keyExtractor={listings => listings.id.toString()}
+                    renderItem={({ item }) =>
+                        <Card
+                            title={item.title}
+                            subTitle={"$" + item.price}
+                            imageUrl={item.images[0].url}
+                            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+                            thumbnailUrl={item.images[0].thumbnailUrl}
+                        />
+                    }
+                />
+            </Screen>
+        </React.Fragment>
     )
 }
 
